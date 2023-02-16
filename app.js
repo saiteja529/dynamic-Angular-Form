@@ -1,4 +1,4 @@
-var app = angular.module('DynamicForm',[]);
+var app = angular.module('DynamicForm',['ngSanitize']);
 
 app.controller('DynamicFormController', function ($scope, $log) {
     
@@ -7,22 +7,21 @@ app.controller('DynamicFormController', function ($scope, $log) {
     // we would get this from the api
     $scope.entity = {
       name : "Test", 
-      label : "Employee satisfaction form",
+      label : "<h1>Employee Survey Feedback</h1>"
+    +"<p>Thank you for participating in our employee survey. Your feedback is important to us and will help us improve our workplace.</p>",
       fields :
         [ {type: "date", name: "date", label: "Date" , required: true},
           {type: "text", name: "firstname", label: "Name" , required: true, data:""},
-          
-          // {type: "email", name: "emailUser", label: "Email" , required: true, data:""},
 
           {type: "text", name: "Manager", label: "Manager ID" , required: true, data:""},
 
-          {type: "radio", name: "MentalHealth", label: "how Healty are you mentally?" , options:[{id: 1, name: "excellent"},{id: 2, name: "good"},{id: 3, name: "fine"},{id: 4, name: "not fine"}], required: true, data:""},
-
-          //  {type: "password", name: "pass", label: "Password" , min: 6, max:20, required: true, data:""},
+          {type: "radio", name: "overallSatisfaction", label: "Overall Satisfaction" , options:[{id: 1, name: "Not at all satisfied"},{id: 2, name: "Somewhat dissatisfied"},{id: 3, name: "Neutral"},{id: 4, name: "Somewhat satisfied"},
+          {id: 5, name: "Very satisfied"}
+          ], required: true, data:""},
          
           {type: "select", name: "currentWork", label: "how much work you do usually in a day?" , options:[{name: "Too Much"},{name: "good amount of work"},{name: "Just enough"},{name: "not that much"}], required: true, data:""},
            {type: "textarea", name: "workFeedback", label: "work Feedback" , required: false, data:""},
-          {type: "checkbox", name: "physicalActivities", label: "Mention all you do frequenty" , options:[{id: 1, name: "Physical Workout/ walking daily"},{id: 2, name: "driving for long hours daily"},{id: 3, name: "Food is enoughly nutrient in office"},{id: 4, name: "not willing to mention this"}], required: true, data:""}
+          {type: "checkbox", name: "Work-Life-Balance", label: "Work-Life Balance" , options:[{id: 1, name: "I have enough time for my personal life"},{id: 2, name: "I feel stressed about my workload"},{id: 3, name: "I work long hours"},{id: 4, name: "I feel valued and respected for my contributions regardless of my background"}], required: true, data:""}
         ]
       };
 
@@ -42,6 +41,11 @@ app.controller('DynamicFormController', function ($scope, $log) {
        
     $scope.entity= JSON.parse($scope.editableForm);
     $scope.showEditPanel=false;
+};
+ $scope.applyChanges
+ = function () {
+       
+    $scope.entity= JSON.parse($scope.editableForm);
 };
 
 $scope.cancelUpdate
