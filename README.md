@@ -1,2 +1,2 @@
 # dynamic-Angular-Form
-demo : https://plnkr.co/edit/KAaz3f03ph6qq1L1
+demo : https://run.plnkr.co/preview/cle6pv0aj0007346tjwq415j5/
